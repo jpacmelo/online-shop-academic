@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgresql:
+    container_name: postgresql_postgresql
+    image: postgres:10
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: onlineshop
+    ports:
+      - "5432:5432"
+
+  flyway_postgresql:
+    image: boxfuse/flyway
+    command: "clean migrate"
+    depends_on:
+      - postgresql
+    volumes:
+      - $PWD/database/flyway/config:/flyway/conf
+      - $PWD/database/flyway/sql-scripts:/flyway/sql
