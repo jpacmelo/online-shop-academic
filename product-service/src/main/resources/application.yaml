@@ -1,3 +1,5 @@
-spring.datasource.url=jdbc:postgresql://localhost:5431/onlineshop
-spring.datasource.username=postgres
-spring.datasource.password=postgres
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/onlineshop
+    username: postgres
+    password: postgres

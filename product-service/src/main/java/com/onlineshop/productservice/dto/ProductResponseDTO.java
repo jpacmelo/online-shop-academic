@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponseDTO {
-    private String id;
+    private long id;
     private String name;
     private String description;
     private BigDecimal price;
