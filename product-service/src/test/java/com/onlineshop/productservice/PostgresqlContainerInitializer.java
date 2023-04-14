@@ -25,8 +25,8 @@ public class PostgresqlContainerInitializer implements ApplicationContextInitial
     private PostgreSQLContainer getPostgresqlContainer() {
         return new PostgreSQLContainer<>("postgres:10")
             .withDatabaseName("onlineshop")
-            .withUsername("postgres")
-            .withPassword("postgres");
+            .withUsername("test")
+            .withPassword("test");
     }
 
 }
