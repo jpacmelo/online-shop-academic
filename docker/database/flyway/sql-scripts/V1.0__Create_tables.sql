@@ -5,3 +5,10 @@ create table if not exists PRODUCT
     description                     VARCHAR(512),
     price                           NUMERIC
 );
+create table if not exists INVENTORY (
+    id                              BIGSERIAL PRIMARY KEY,
+    quantity                        INTEGER,
+    sku_code                        VARCHAR(255)
+);
+INSERT INTO INVENTORY (quantity, sku_code) VALUES (100, 'iphone_13');
+INSERT INTO INVENTORY (quantity, sku_code) VALUES (0, 'iphone_13_red');
