@@ -15,7 +15,8 @@ public class InventoryserviceApplication {
 		SpringApplication.run(InventoryserviceApplication.class, args);
 	}
 
-	/**@Bean
+	// Option to load data on application start
+	/*@Bean
 	public CommandLineRunner loadData(InventoryRepository inventoryRepository) {
 		return args -> {
 			Inventory inventory = new Inventory();
@@ -29,5 +30,5 @@ public class InventoryserviceApplication {
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory1);
 		};
-	}**/
+	}*/
 }
