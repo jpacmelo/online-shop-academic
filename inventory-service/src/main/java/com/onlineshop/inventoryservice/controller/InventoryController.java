@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/inventory")
@@ -22,4 +23,9 @@ public class InventoryController {
         return inventoryService.getInventoryIn(skuCodes);
     }
 
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String retrieveListedInventory(@RequestParam Map<String,Integer> itemsToRetrieve){
+        return inventoryService.retrieveInventory(itemsToRetrieve);
+    }
 }
