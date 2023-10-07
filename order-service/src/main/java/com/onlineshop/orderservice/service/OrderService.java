@@ -11,8 +11,10 @@ import com.onlineshop.orderservice.model.Order;
 import com.onlineshop.orderservice.model.OrderLineItems;
 import com.onlineshop.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
@@ -23,7 +25,7 @@ public class OrderService {
     private final String UNABLE_TO_PROCESS_ORDER = "Unable to process order, at least one item with insufficient stock";
     private final String ORDER_SUCCESSFUL = "Order placed successfully";
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest){
         if(orderRequest==null || orderRequest.getOrderLineItemsDtoList() == null || orderRequest.getOrderLineItemsDtoList().isEmpty()){
@@ -49,9 +51,10 @@ public class OrderService {
         order.setOrderLineItemsList(orderLineItemsMap.values().stream().toList());
 
         //Call inventory service and place order if product is in stock
-        String orderStatus = webClient.put()
-                .uri("http://localhost:8083/api/inventory",
-                        uriBuilder -> uriBuilder.queryParam("orderItem", orderLineItemsMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getQuantity()))).build())
+        String orderStatus = webClientBuilder.build().put()
+                .uri("http://inventory-service/api/inventory")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(orderLineItemsMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getQuantity()))))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: order-service
   datasource:
     url: jdbc:postgresql://localhost:5431/onlineshop
     username: postgres
@@ -14,3 +16,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8082
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

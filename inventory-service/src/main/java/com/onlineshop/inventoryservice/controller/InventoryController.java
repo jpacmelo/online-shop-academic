@@ -25,7 +25,7 @@ public class InventoryController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public String retrieveListedInventory(@RequestParam Map<String,Integer> itemsToRetrieve){
+    public String retrieveListedInventory(@RequestBody Map<String,Integer> itemsToRetrieve){
         return inventoryService.retrieveInventory(itemsToRetrieve);
     }
 }
